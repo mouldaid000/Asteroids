@@ -3,6 +3,9 @@ import java.awt.*;
  * Created by mouldaid000 on 2/10/2017.
  */
 public abstract class Entity {
+    
+    //This comment was made via internets
+    
     private Game game;
     private Color color;
     private int x, y, width, height;
