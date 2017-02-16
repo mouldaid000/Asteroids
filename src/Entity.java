@@ -4,7 +4,7 @@ import java.awt.*;
  */
 public abstract class Entity {
     
-    //This comment was made via internets
+    //This comment was made via internets by Ethan
     
     private Game game;
     private Color color;
