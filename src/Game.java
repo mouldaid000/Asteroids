@@ -167,7 +167,7 @@ public class Game extends JPanel implements ActionListener{
     }
 
     public void addBullet(int dy, int dx){
-        entities.add(new Bullet(Color.yellow, entities.get(0).getX() + (entities.get(0).getWidth()) / 2, entities.get(0).getY() + (entities.get(0).getHeight()) / 2, 10, 10, dy this));
+        entities.add(new Bullet(Color.yellow, entities.get(0).getX() + (entities.get(0).getWidth()) / 2, entities.get(0).getY() + (entities.get(0).getHeight()) / 2, 10, 10, dy, dx, this));
     }
 
     public int getCursorX() {
