@@ -5,33 +5,11 @@ import java.awt.*;
 public abstract class Entity {
     private Game game;
     private Color color;
-    private int x, y, width, height, dy, dx;
+    private int x, y, width, height;
 
-    public void move(){
-        double nextLeft = x + dx;
-        double nextRight = x + width + dx;
-        double nextTop = y + dy;
-        double nextBottom = y + height + dy;
+    private double dx, dy, maxSpeed;
 
-        if(nextTop <=0){
-            y = game.getHeight() - height;
-        }
-
-        if(nextBottom > game.getHeight()){
-            y = 0;
-        }
-
-        if(nextLeft <= 0){
-            x = game.getWidth() - width;
-        }
-
-        if(nextRight > game.getWidth()){
-            x = 0;
-        }
-
-        x+=dx;
-        y+=dx;
-    }
+    public abstract void move();
 
     public Entity(Color color, int x, int y, int width, int height, Game game){
         this.game = game;
@@ -40,8 +18,8 @@ public abstract class Entity {
         this.y = y;
         this.width = width;
         this.height = height;
-        dx = -4;
-        dy = 4;
+        this.maxSpeed = 20;
+
     }
     public boolean collides(Entity other){
         return getBounds().intersects(other.getBounds());
@@ -68,21 +46,48 @@ public abstract class Entity {
         return x;
     }
 
-    public void setX(int x) {
-        this.x = x;
+    public void wallCollision(){
+        double nextLeft = x + dx;
+        double nextRight = x + width + dx;
+        double nextTop = y + dy;
+        double nextBottom = y + height + dy;
+
+        if(nextTop <=0){
+            y = game.getHeight() - height;
+        }
+
+        if(nextBottom > game.getHeight()){
+            y = 0;
+        }
+
+        if(nextLeft <= 0){
+            x = game.getWidth() - width;
+        }
+
+        if(nextRight > game.getWidth()){
+            x = 0;
+        }
+    }
+
+
+
+    public void setX(double x) {
+        this.x = (int)Math.round(x);
     }
 
     public int getY() {
         return y;
     }
 
-    public void setY(int y) {
-        this.y = y;
+    public void setY(double y) {
+        this.y = (int)Math.round(y);
     }
 
     public int getWidth() {
         return width;
     }
+
+
 
     public void setWidth(int width) {
         this.width = width;
@@ -98,7 +103,7 @@ public abstract class Entity {
         return dx;
     }
 
-    public void setDx(int dx) {
+    public void setDx(double dx) {
         this.dx = dx;
     }
 
@@ -106,15 +111,20 @@ public abstract class Entity {
         return dy;
     }
 
-    public void setDy(int dy) {
+    public void setDy(double dy) {
         this.dy = dy;
+    }
+
+    public double getSpeed(){
+       return Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
+    }
+
+    public double getMaxSpeed(){
+        return maxSpeed;
     }
 
     public Rectangle getBounds(){
         return new Rectangle(x,y,width,height);
     }
-    public void playerMove(){
-        setX(game.positionX);
-        setY(game.positionY);
-    }
+
 }

@@ -2,14 +2,15 @@
  * Created by mouldaid000 on 2/10/2017.
  */
 import javax.swing.*;
+import javax.swing.event.MouseInputAdapter;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 
 public class Game extends JPanel implements ActionListener{
     Timer timer;
-    int positionX, positionY;
-    boolean wPressed, aPressed, sPressed, dPressed, spacePressed; //Depressing, isn't it? Happy vALONEtine's day
+    int cursorX, cursorY;
+    boolean wPressed, aPressed, sPressed, dPressed, leftClick, spacePressed; //Depressing, isn't it? Happy vALONEtine's day
     ArrayList<Entity> entities;
 
     public Game(){
@@ -23,7 +24,9 @@ public class Game extends JPanel implements ActionListener{
         frame.pack();
         frame.setLocationRelativeTo(null);
 
-        addKeyListener(new KeyListener() {
+
+
+        frame.addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
                 //for the memes
@@ -34,10 +37,88 @@ public class Game extends JPanel implements ActionListener{
                 if(e.getKeyCode() == KeyEvent.VK_W){
                     wPressed = true;
                 }
+                if(e.getKeyCode() == KeyEvent.VK_S){
+                    sPressed = true;
+                }
+                if(e.getKeyCode() == KeyEvent.VK_A){
+                    aPressed = true;
+                }
+                if(e.getKeyCode() == KeyEvent.VK_D){
+                    dPressed = true;
+                }
             }
             @Override
             public void keyReleased(KeyEvent e){
+                if(e.getKeyCode() == KeyEvent.VK_W){
+                    wPressed = false;
+                }
+                if(e.getKeyCode() == KeyEvent.VK_S){
+                    sPressed = false;
+                }
+                if(e.getKeyCode() == KeyEvent.VK_A){
+                    aPressed = false;
+                }
+                if(e.getKeyCode() == KeyEvent.VK_D){
+                    dPressed = false;
+                }
+            }
+        });
 
+        addMouseMotionListener(new MouseMotionAdapter(){
+            @Override
+            public void mouseMoved(MouseEvent e){
+                super.mouseMoved(e);
+                cursorX = e.getX();
+                cursorY = e.getY();
+            }
+        });
+
+        addMouseListener(new MouseInputAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                super.mousePressed(e);
+                if(e.getButton() == MouseEvent.BUTTON1){
+                    leftClick = true;
+                    System.out.println("Mouse clicked");
+                }
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                super.mouseReleased(e);
+                if(e.getButton() == MouseEvent.BUTTON1){
+                    leftClick = false;
+                }
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                super.mouseEntered(e);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                super.mouseExited(e);
+            }
+
+            @Override
+            public void mouseWheelMoved(MouseWheelEvent e) {
+                super.mouseWheelMoved(e);
+            }
+
+            @Override
+            public void mouseDragged(MouseEvent e) {
+                super.mouseDragged(e);
+            }
+
+            @Override
+            public void mouseMoved(MouseEvent e) {
+                super.mouseMoved(e);
             }
         });
     }
@@ -50,7 +131,7 @@ public class Game extends JPanel implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         collisions();
-        entities.get(0);
+        entities.get(0).move();
         for(int i = 1; i < entities.size(); i++){
             entities.get(i).move();
         }
@@ -83,5 +164,41 @@ public class Game extends JPanel implements ActionListener{
         for(Entity obj : entities){
             obj.paint(g);
         }
+    }
+
+    public void addBullet(int dy, int dx){
+        entities.add(new Bullet(Color.yellow, entities.get(0).getX() + (entities.get(0).getWidth()) / 2, entities.get(0).getY() + (entities.get(0).getHeight()) / 2, 10, 10, dy this));
+    }
+
+    public int getCursorX() {
+        return cursorX;
+    }
+
+    public int getCursorY() {
+        return cursorY;
+    }
+
+    public boolean iswPressed() {
+        return wPressed;
+    }
+
+    public boolean isaPressed() {
+        return aPressed;
+    }
+
+    public boolean issPressed() {
+        return sPressed;
+    }
+
+    public boolean isdPressed() {
+        return dPressed;
+    }
+
+    public boolean isLeftClick() {
+        return leftClick;
+    }
+
+    public boolean isSpacePressed() {
+        return spacePressed;
     }
 }

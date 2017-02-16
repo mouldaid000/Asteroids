@@ -11,4 +11,11 @@ public class Asteroid extends Entity {
         g.setColor(getColor());
         g.fillRect(getX(),getY(),getWidth(),getHeight());
     }
+
+    public void move(){
+        wallCollision();
+
+        setX(getX() + getDx());
+        setY(getY() + getDy());
+    }
 }
