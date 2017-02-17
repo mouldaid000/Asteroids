@@ -47,13 +47,17 @@ int bulletCooldown = 0;
             setDy(prevDy);
         }
 
-        if(getGame().isLeftClick()){
+        if(getGame().isLeftClick() && bulletCooldown <= 0){
             bulletCooldown = 30;
-            bulletCooldown--;
+
             getGame().addBullet(calcBulletDy(), calcBulletDx());
 
 
         }
+
+        bulletCooldown --;
+        if(bulletCooldown < 0)
+            bulletCooldown = 0;
 
         wallCollision();
 
@@ -70,6 +74,6 @@ int bulletCooldown = 0;
     }
 
     public double calcCursorAngle(){
-        return Math.atan2(getGame().getCursorY() - getCenterY(), getGame().getCursorY() - getCenterY());
+        return Math.atan2(getGame().getCursorY() - getY(), getGame().getCursorX() - getX());
     }
 }
