@@ -84,7 +84,7 @@ public class Game extends JPanel implements ActionListener{
                 super.mousePressed(e);
                 if(e.getButton() == MouseEvent.BUTTON1){
                     leftClick = true;
-                    System.out.println("Mouse clicked");
+
                 }
             }
 
@@ -136,7 +136,7 @@ public class Game extends JPanel implements ActionListener{
             entities.get(i).move();
         }
 
-        System.out.println(cursorX);
+
         repaint();
     }
     public void init(){
