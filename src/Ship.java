@@ -50,7 +50,7 @@ int bulletCooldown = 0;
         if(getGame().isLeftClick()){
             bulletCooldown = 30;
             bulletCooldown--;
-            Game.addBullet(calcBulletDy(), calcBulletDx());
+            getGame().addBullet(calcBulletDy(), calcBulletDx());
 
 
         }
@@ -62,14 +62,14 @@ int bulletCooldown = 0;
     }
 
     public double calcBulletDx(){
-        return
+        return 10 * Math.cos(calcCursorAngle());
     }
 
     public double calcBulletDy(){
-
+        return 10 * Math.sin(calcCursorAngle());
     }
 
     public double calcCursorAngle(){
-        return Math.atan2()
+        return Math.atan2(getGame().getCursorY() - getCenterY(), getGame().getCursorY() - getCenterY());
     }
 }
