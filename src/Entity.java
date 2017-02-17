@@ -23,6 +23,7 @@ public abstract class Entity {
         this.height = height;
         this.maxSpeed = 20;
 
+
     }
     public boolean collides(Entity other){
         return getBounds().intersects(other.getBounds());
@@ -47,6 +48,14 @@ public abstract class Entity {
 
     public int getX() {
         return x;
+    }
+
+    public int getCenterX(){
+        return x - (width / 2);
+    }
+
+    public int getCenterY(){
+        return y - (height / 2);
     }
 
     public void wallCollision(){

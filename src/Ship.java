@@ -50,6 +50,8 @@ int bulletCooldown = 0;
         if(getGame().isLeftClick()){
             bulletCooldown = 30;
             bulletCooldown--;
+            Game.addBullet(calcBulletDy(), calcBulletDx());
+
 
         }
 
@@ -57,5 +59,17 @@ int bulletCooldown = 0;
 
         setX(getX() + getDx());
         setY(getY() + getDy());
+    }
+
+    public double calcBulletDx(){
+        return
+    }
+
+    public double calcBulletDy(){
+
+    }
+
+    public double calcCursorAngle(){
+        return Math.atan2()
     }
 }
