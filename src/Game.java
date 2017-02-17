@@ -69,8 +69,8 @@ public class Game extends JPanel implements ActionListener{
             public void mouseMoved(MouseEvent e){
                 super.mouseMoved(e);
                 cursorX = e.getX();
-                cursorY = e.getY();
-            }
+               cursorY = e.getY();
+           }
         });
 
         addMouseListener(new MouseInputAdapter() {
@@ -118,7 +118,7 @@ public class Game extends JPanel implements ActionListener{
 
             @Override
             public void mouseMoved(MouseEvent e) {
-                super.mouseMoved(e);
+
             }
         });
     }
@@ -135,6 +135,8 @@ public class Game extends JPanel implements ActionListener{
         for(int i = 1; i < entities.size(); i++){
             entities.get(i).move();
         }
+
+        System.out.println(cursorX);
         repaint();
     }
     public void init(){

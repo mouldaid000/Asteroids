@@ -6,7 +6,7 @@ import java.awt.*;
  */
 public class Ship extends Entity {
 
-int bulletCooldown = 0;
+boolean bulletFired = false;
 
     public Ship(Color color, int x, int y, int width, int height, Game game){
         super(color, x, y, width, height, game);
@@ -47,17 +47,16 @@ int bulletCooldown = 0;
             setDy(prevDy);
         }
 
-        if(getGame().isLeftClick() && bulletCooldown <= 0){
-            bulletCooldown = 30;
+        if(getGame().isLeftClick() && !bulletFired){
+            bulletFired = true;
 
             getGame().addBullet(calcBulletDy(), calcBulletDx());
 
 
         }
 
-        bulletCooldown --;
-        if(bulletCooldown < 0)
-            bulletCooldown = 0;
+        if(!getGame().isLeftClick())
+            bulletFired = false;
 
         wallCollision();
 
