@@ -6,8 +6,8 @@ import java.awt.*;
 
 public class Asteroid extends Entity {
     private boolean original = true;
-    public Asteroid(Color color, int x, int y, int width, int height, Game game){
-        super(color,x,y,width,height,game);
+    public Asteroid(Color color, int x, int y, int width, int height, Game game, int index){
+        super(color,x,y,width,height,game, index);
         setRandomVelocity();
     }
     public void paint(Graphics g){

@@ -8,8 +8,8 @@ public class Ship extends Entity {
 
 boolean bulletFired = false;
 
-    public Ship(Color color, int x, int y, int width, int height, Game game){
-        super(color, x, y, width, height, game);
+    public Ship(Color color, int x, int y, int width, int height, Game game, int index){
+        super(color, x, y, width, height, game, index);
     }
     public void paint(Graphics g){
         g.setColor(getColor());
@@ -50,7 +50,7 @@ boolean bulletFired = false;
         if(getGame().isLeftClick() && !bulletFired){
             bulletFired = true;
 
-            getGame().addEntity(new Bullet(Color.yellow, getX() + (getWidth()) / 2, getY() + (getHeight()) / 2, 10, 10, calcBulletDy(), calcBulletDx(), getGame()));
+            getGame().addEntity(new Bullet(Color.yellow, getX() + (getWidth()) / 2, getY() + (getHeight()) / 2, 10, 10, calcBulletDy(), calcBulletDx(), getGame(), getGame().getNextIndex()));
 
 
         }

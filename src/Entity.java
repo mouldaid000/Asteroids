@@ -8,13 +8,13 @@ public abstract class Entity {
     
     private Game game;
     private Color color;
-    private int x, y, width, height;
+    private int x, y, width, height, index;
 
     private double dx, dy, maxSpeed;
 
     public abstract void move();
 
-    public Entity(Color color, int x, int y, int width, int height, Game game){
+    public Entity(Color color, int x, int y, int width, int height, Game game, int index){
         this.game = game;
         this.color = color;
         this.x = x;
@@ -22,6 +22,7 @@ public abstract class Entity {
         this.width = width;
         this.height = height;
         this.maxSpeed = 20;
+        this.index = index;
 
 
     }
@@ -56,6 +57,14 @@ public abstract class Entity {
 
     public int getCenterY(){
         return y - (height / 2);
+    }
+
+    public void decrementIndex(){
+        index--;
+    }
+
+    public int getIndex(){
+        return index;
     }
 
     public void wallCollision(){

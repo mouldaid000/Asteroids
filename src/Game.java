@@ -141,17 +141,17 @@ public class Game extends JPanel implements ActionListener{
     }
     public void init(){
         entities = new ArrayList<Entity>();
-        entities.add(new Ship(Color.red, getWidth()/2, getHeight()/2, 30, 30, this));
+        entities.add(new Ship(Color.red, getWidth()/2, getHeight()/2, 30, 30, this, 0) );
 
         for(int i = 0; i < 10; i++){
-            entities.add(new Asteroid(Color.green, (int)(25+(getWidth()-100)*Math.random()), (int)(25 + (getHeight() - 50)*Math.random()), 30, 30, this));
+            entities.add(new Asteroid(Color.green, (int)(25+(getWidth()-100)*Math.random()), (int)(25 + (getHeight() - 50)*Math.random()), 30, 30, this, entities.size()));
         }
     }
     public void collisions(){
         for(int i = 1; i < entities.size(); i++){
             if(entities.get(0).collides(entities.get(i))){
                 if(entities.get(i) instanceof Asteroid){
-                    entities.remove(i);
+                    removeEntity(i);
                     JOptionPane.showMessageDialog(null, "You dead cuz");
                 }
             }
@@ -170,6 +170,18 @@ public class Game extends JPanel implements ActionListener{
 
     public void addEntity(Entity ent){
         entities.add(ent);
+    }
+
+    public void removeEntity(int index){
+        entities.remove(index);
+        for(int i = index; i < entities.size(); i++){
+            entities.get(i).decrementIndex();
+
+        }
+    }
+
+    public int getNextIndex(){
+        return entities.size();
     }
 
     public int getCursorX() {
