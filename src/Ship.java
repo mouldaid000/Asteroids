@@ -50,7 +50,7 @@ boolean bulletFired = false;
         if(getGame().isLeftClick() && !bulletFired){
             bulletFired = true;
 
-            getGame().addBullet(calcBulletDy(), calcBulletDx());
+            getGame().addEntity(new Bullet(Color.yellow, getX() + (getWidth()) / 2, getY() + (getHeight()) / 2, 10, 10, calcBulletDy(), calcBulletDx(), getGame()));
 
 
         }
