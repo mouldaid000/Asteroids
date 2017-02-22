@@ -29,4 +29,8 @@ public class Bullet extends Entity {
             getGame().removeEntity(getIndex());
         }
     }
+
+    public void kill(){
+getGame().removeEntity(getIndex());
+    }
 }
