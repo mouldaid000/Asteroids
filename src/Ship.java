@@ -23,22 +23,22 @@ boolean bulletFired = false;
 
         if(getGame().iswPressed()){
 
-            setDy(getDy() - 0.25);
+            setDy(getDy() - .125);
 
         }
 
         if(getGame().isaPressed()){
-            setDx(getDx() - 0.25);
+            setDx(getDx() - .125);
 
         }
 
         if(getGame().issPressed()){
-            setDy(getDy() + 0.25);
+            setDy(getDy() + .125);
 
         }
 
         if(getGame().isdPressed()){
-            setDx(getDx() + 0.25);
+            setDx(getDx() + .125);
 
         }
 

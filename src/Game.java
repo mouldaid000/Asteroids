@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class Game extends JPanel implements ActionListener{
     Timer timer;
     int cursorX, cursorY;
-    boolean wPressed, aPressed, sPressed, dPressed, leftClick, spacePressed; //Depressing, isn't it? Happy vALONEtine's day
+    boolean wPressed, aPressed, sPressed, dPressed, leftClick, spacePressed, menu, play, pause; //Depressing, isn't it? Happy vALONEtine's day
     ArrayList<Entity> entities;
 
     public Game(){
@@ -45,6 +45,12 @@ public class Game extends JPanel implements ActionListener{
                 }
                 if(e.getKeyCode() == KeyEvent.VK_D){
                     dPressed = true;
+                }
+                if(e.getKeyCode() == KeyEvent.VK_SPACE){
+                    spacePressed = true;
+                }
+                if(e.getKeyCode() = KeyEvent.VK_P){
+                    pause = true;
                 }
             }
             @Override
@@ -162,10 +168,20 @@ public class Game extends JPanel implements ActionListener{
         timer.start();
     }
     public void paint(Graphics g){
+
         super.paint(g);
-        for(Entity obj : entities){
-            obj.paint(g);
+        if(menu){
+            printSimpleString("ASTEROIDS",getWidth(),0,200,g);
         }
+        if(play){
+            for(Entity obj : entities){
+                obj.paint(g);
+            }
+        }
+        if(pause){
+            printSimpleString("PAUSED",getWidth(), 0,200,g);
+        }
+
     }
 
     public void addEntity(Entity ent){
@@ -214,5 +230,19 @@ public class Game extends JPanel implements ActionListener{
 
     public boolean isSpacePressed() {
         return spacePressed;
+    }
+    public boolean isMenu(){
+        return menu;
+    }
+    public boolean isPlay(){
+        return play;
+    }
+    public boolean isPause(){
+        return pause;
+    }
+    private void printSimpleString(String s, int width, int XPos, int YPos, Graphics g2d){
+        int stringLen = (int)g2d.getFontMetrics().getStringBounds(s, g2d).getWidth();
+        int start = width/2 - stringLen/2;
+        g2d.drawString(s, start + XPos, YPos);
     }
 }
