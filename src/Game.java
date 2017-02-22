@@ -144,7 +144,7 @@ public class Game extends JPanel implements ActionListener{
         entities.add(new Ship(Color.red, getWidth()/2, getHeight()/2, 30, 30, this, 0) );
 
         for(int i = 0; i < 10; i++){
-            entities.add(new Asteroid(Color.green, (int)(25+(getWidth()-100)*Math.random()), (int)(25 + (getHeight() - 50)*Math.random()), 30, 30, this, entities.size()));
+            entities.add(new Asteroid(Color.WHITE, (int)(25+(getWidth()-100)*Math.random()), (int)(25 + (getHeight() - 50)*Math.random()), 30, 30, this, true, entities.size()));
         }
     }
     public void collisions(){
@@ -153,6 +153,15 @@ public class Game extends JPanel implements ActionListener{
                 if(entities.get(i) instanceof Asteroid){
                     removeEntity(i);
                     JOptionPane.showMessageDialog(null, "You dead cuz");
+                }
+            }
+
+            if(entities.get(i) instanceof Bullet){
+                for(int n = 1; n < entities.size(); n++){
+                    if(entities.get(n) instanceof Asteroid && entities.get(n).collides(entities.get(i))){
+                        entities.get(i).kill();
+                        entities.get(n).kill();
+                    }
                 }
             }
         }

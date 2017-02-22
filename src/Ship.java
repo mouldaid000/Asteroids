@@ -75,4 +75,8 @@ boolean bulletFired = false;
     public double calcCursorAngle(){
         return Math.atan2(getGame().getCursorY() - getY(), getGame().getCursorX() - getX());
     }
+
+    public void kill(){
+
+    }
 }

@@ -5,9 +5,12 @@ import java.awt.*;
  */
 
 public class Asteroid extends Entity {
+    int hitTimer;
     private boolean original = true;
-    public Asteroid(Color color, int x, int y, int width, int height, Game game, int index){
+    public Asteroid(Color color, int x, int y, int width, int height, Game game, boolean original, int index){
         super(color,x,y,width,height,game, index);
+        this.original = original;
+        hitTimer = 10;
         setRandomVelocity();
     }
     public void paint(Graphics g){
@@ -20,6 +23,7 @@ public class Asteroid extends Entity {
 
         setX(getX() + getDx());
         setY(getY() + getDy());
+        hitTimer--;
     }
 
     public void setRandomVelocity(){
@@ -36,7 +40,17 @@ public class Asteroid extends Entity {
 
     }
 
-    public void split(){
+    public void split() {
+        if(hitTimer <= 0){
+        for (int i = 0; i < 2; i++) {
+            getGame().addEntity(new Asteroid(Color.WHITE, getX(), getY(), (int) (getWidth() / 1.5), (int)(getHeight() / 1.5), getGame(), false, getGame().getNextIndex()));
+        }
 
+        getGame().removeEntity(getIndex());
+    }
+    }
+
+    public void kill(){
+        split();
     }
 }

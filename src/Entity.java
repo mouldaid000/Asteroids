@@ -31,6 +31,8 @@ public abstract class Entity {
     }
     public abstract void paint(Graphics g);
 
+    public abstract void kill();
+
     public Game getGame() {
         return game;
     }
