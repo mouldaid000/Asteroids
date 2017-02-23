@@ -10,7 +10,8 @@ import java.util.ArrayList;
 public class Game extends JPanel implements ActionListener{
     Timer timer;
     int cursorX, cursorY;
-    boolean wPressed, aPressed, sPressed, dPressed, leftClick, spacePressed, menu, play, pause; //Depressing, isn't it? Happy vALONEtine's day
+    boolean wPressed, aPressed, sPressed, dPressed, leftClick, spacePressed, menu, play, pause;//Depressing, isn't it? Happy vALONEtine's day
+
     ArrayList<Entity> entities;
 
     public Game(){
@@ -23,6 +24,9 @@ public class Game extends JPanel implements ActionListener{
         frame.add(this);
         frame.pack();
         frame.setLocationRelativeTo(null);
+        play = true;
+        menu = false;
+        pause = false;
 
 
 
@@ -49,7 +53,7 @@ public class Game extends JPanel implements ActionListener{
                 if(e.getKeyCode() == KeyEvent.VK_SPACE){
                     spacePressed = true;
                 }
-                if(e.getKeyCode() = KeyEvent.VK_P){
+                if(e.getKeyCode() == KeyEvent.VK_P){
                     pause = true;
                 }
             }
