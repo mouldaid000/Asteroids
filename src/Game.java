@@ -52,7 +52,7 @@ public class Game extends JPanel implements ActionListener{
                     spacePressed = true;
                 }
                 if(e.getKeyCode() == KeyEvent.VK_P){
-                    pause = true;
+                     Stats.togglePause();
                 }
             }
             @Override
@@ -184,7 +184,7 @@ public class Game extends JPanel implements ActionListener{
                 obj.paint(g);
             }
         }
-        if(Stats.isPause){
+        if(Stats.isPause()){
             printSimpleString("PAUSED",getWidth(), 0,200,g);
         }
 
