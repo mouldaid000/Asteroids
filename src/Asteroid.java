@@ -6,11 +6,11 @@ import java.awt.*;
 
 public class Asteroid extends Entity {
     int hitTimer;
-    private boolean original = true;
-    public Asteroid(Color color, int x, int y, int width, int height, Game game, boolean original, int index){
+    private int splitLevel;
+    public Asteroid(Color color, int x, int y, int width, int height, Game game, int splitLevel, int index){
         super(color,x,y,width,height,game, index);
-        this.original = original;
-        hitTimer = 10;
+        this.splitLevel = splitLevel;
+        hitTimer = 20;
         setRandomVelocity();
     }
     public void paint(Graphics g){
@@ -30,7 +30,7 @@ public class Asteroid extends Entity {
         double speed = (Math.random() * 3) + 1;
         double angle = Math.random() * (2 * Math.PI);
 
-        if(!original){
+        if(!(splitLevel == 0)){
             speed *= 2;
         }
 
@@ -41,13 +41,15 @@ public class Asteroid extends Entity {
     }
 
     public void split() {
-        if(hitTimer <= 0){
+        if(hitTimer <= 0 && splitLevel < 2){
         for (int i = 0; i < 2; i++) {
-            getGame().addEntity(new Asteroid(Color.WHITE, getX(), getY(), (int) (getWidth() / 1.5), (int)(getHeight() / 1.5), getGame(), false, getGame().getNextIndex()));
+            getGame().addEntity(new Asteroid(Color.WHITE, getX(), getY(), (int) (getWidth() / 1.5), (int)(getHeight() / 1.5), getGame(), splitLevel + 1, getGame().getNextIndex()));
         }
 
         getGame().removeEntity(getIndex());
     }
+    else
+            getGame().removeEntity(getIndex());
     }
 
     public void kill(){

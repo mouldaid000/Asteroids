@@ -2,7 +2,7 @@
  * Created by mouldaid000 on 2/23/2017.
  */
 public class Stats {
-    static boolean menu = true, play = false, pause = false, end = false;
+    static boolean menu = false, play = true, pause = false, end = false;
 
     public static void main(String[] args){
 

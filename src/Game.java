@@ -152,7 +152,7 @@ public class Game extends JPanel implements ActionListener{
         entities.add(new Ship(Color.red, getWidth()/2, getHeight()/2, 30, 30, this, 0) );
 
         for(int i = 0; i < 10; i++){
-            entities.add(new Asteroid(Color.WHITE, (int)(25+(getWidth()-100)*Math.random()), (int)(25 + (getHeight() - 50)*Math.random()), 30, 30, this, true, entities.size()));
+            entities.add(new Asteroid(Color.WHITE, (int)(25+(getWidth()-100)*Math.random()), (int)(25 + (getHeight() - 50)*Math.random()), 30, 30, this, 0, entities.size()));
         }
     }
     public void collisions(){

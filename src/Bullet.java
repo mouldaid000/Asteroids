@@ -39,6 +39,7 @@ getGame().removeEntity(getIndex());
             if(getGame().getHitbox(i).intersects(getBounds())){
                 if(getGame().getEntity(i) instanceof Asteroid){
                     getGame().getEntity(i).kill();
+                    getGame().removeEntity(getIndex());
                 }
             }
         }
