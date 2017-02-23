@@ -33,4 +33,14 @@ public class Bullet extends Entity {
     public void kill(){
 getGame().removeEntity(getIndex());
     }
+
+    public void checkCollisions(){
+        for(int i = 1; i < getGame().getNextIndex(); i++){
+            if(getGame().getHitbox(i).intersects(getBounds())){
+                if(getGame().getEntity(i) instanceof Asteroid){
+                    getGame().getEntity(i).kill();
+                }
+            }
+        }
+    }
 }

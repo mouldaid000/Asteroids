@@ -158,28 +158,23 @@ public class Game extends JPanel implements ActionListener{
         }
     }
     public void collisions(){
-        for(int i = 1; i < entities.size(); i++){
-            if(entities.get(0).collides(entities.get(i))){
-                if(entities.get(i) instanceof Asteroid){
-                    removeEntity(i);
-                    JOptionPane.showMessageDialog(null, "You dead cuz");
-                }
-            }
+        for(int i = 0; i < entities.size(); i++) {
 
-            if(entities.get(i) instanceof Bullet){
-                for(int n = 1; n < entities.size(); n++){
-                    if(entities.get(n) instanceof Asteroid && entities.get(n).collides(entities.get(i))){
-                        entities.get(i).kill();
-                        entities.get(n).kill();
-                    }
-                }
-            }
+            entities.get(i).checkCollisions();
+
+
+
         }
     }
     public void run(){
         timer = new Timer(1000/60, this);
         timer.start();
     }
+
+    public Rectangle getHitbox(int index){
+    return entities.get(index).getBounds();
+    }
+
     public void paint(Graphics g){
 
         super.paint(g);
@@ -199,6 +194,10 @@ public class Game extends JPanel implements ActionListener{
 
     public void addEntity(Entity ent){
         entities.add(ent);
+    }
+
+    public Entity getEntity(int index){
+        return entities.get(index);
     }
 
     public void removeEntity(int index){

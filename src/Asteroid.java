@@ -53,4 +53,8 @@ public class Asteroid extends Entity {
     public void kill(){
         split();
     }
+
+    public void checkCollisions(){
+
+    }
 }
