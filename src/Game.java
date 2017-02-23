@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class Game extends JPanel implements ActionListener{
     Timer timer;
     int cursorX, cursorY;
-    boolean wPressed, aPressed, sPressed, dPressed, leftClick, spacePressed, menu, play, pause;//Depressing, isn't it? Happy vALONEtine's day
+    boolean wPressed, aPressed, sPressed, dPressed, leftClick, spacePressed;//Depressing, isn't it? Happy vALONEtine's day
 
     ArrayList<Entity> entities;
 
@@ -24,9 +24,7 @@ public class Game extends JPanel implements ActionListener{
         frame.add(this);
         frame.pack();
         frame.setLocationRelativeTo(null);
-        play = true;
-        menu = false;
-        pause = false;
+
 
 
 
@@ -178,15 +176,15 @@ public class Game extends JPanel implements ActionListener{
     public void paint(Graphics g){
 
         super.paint(g);
-        if(menu){
+        if(Stats.isMenu()){
             printSimpleString("ASTEROIDS",getWidth(),0,200,g);
         }
-        if(play){
+        if(Stats.isPlay()){
             for(Entity obj : entities){
                 obj.paint(g);
             }
         }
-        if(pause){
+        if(Stats.isPause){
             printSimpleString("PAUSED",getWidth(), 0,200,g);
         }
 
@@ -242,15 +240,6 @@ public class Game extends JPanel implements ActionListener{
 
     public boolean isSpacePressed() {
         return spacePressed;
-    }
-    public boolean isMenu(){
-        return menu;
-    }
-    public boolean isPlay(){
-        return play;
-    }
-    public boolean isPause(){
-        return pause;
     }
     private void printSimpleString(String s, int width, int XPos, int YPos, Graphics g2d){
         int stringLen = (int)g2d.getFontMetrics().getStringBounds(s, g2d).getWidth();
