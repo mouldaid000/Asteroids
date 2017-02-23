@@ -8,7 +8,7 @@ import java.awt.event.*;
 import java.util.ArrayList;
 
 public class Game extends JPanel implements ActionListener{
-    Timer timer;
+    static Timer timer;
     int cursorX, cursorY;
     boolean wPressed, aPressed, sPressed, dPressed, leftClick, spacePressed;//Depressing, isn't it? Happy vALONEtine's day
 
@@ -138,10 +138,12 @@ public class Game extends JPanel implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        collisions();
-        entities.get(0).move();
-        for(int i = 1; i < entities.size(); i++){
-            entities.get(i).move();
+        if(Stats.isPlay()) {
+            collisions();
+            entities.get(0).move();
+            for (int i = 1; i < entities.size(); i++) {
+                entities.get(i).move();
+            }
         }
 
 
@@ -177,7 +179,11 @@ public class Game extends JPanel implements ActionListener{
 
         super.paint(g);
         if(Stats.isMenu()){
-            printSimpleString("ASTEROIDS",getWidth(),0,200,g);
+            g.setFont(new Font("old english text mt",Font.PLAIN, 64));
+            g.setColor(Color.CYAN);
+            printSimpleString("ASTEROIDS",getWidth(),0,300,g);
+            g.setFont(new Font("old english text mt",Font.PLAIN, 48));
+            printSimpleString("Press [SPACE] to play.", getWidth(), 0, 400,g);
         }
         if(Stats.isPlay()){
             for(Entity obj : entities){
@@ -185,7 +191,9 @@ public class Game extends JPanel implements ActionListener{
             }
         }
         if(Stats.isPause()){
-            printSimpleString("PAUSED",getWidth(), 0,200,g);
+            g.setFont(new Font("old english text mt", Font.ITALIC, 54));
+            g.setColor(Color.CYAN);
+            printSimpleString("PAUSED",getWidth(), 0,getHeight()/2,g);
         }
 
     }
