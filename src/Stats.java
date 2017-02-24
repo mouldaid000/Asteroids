@@ -4,9 +4,7 @@
 public class Stats {
     static boolean menu = false, play = true, pause = false, end = false;
 
-    public static void main(String[] args){
 
-    }
 
     public static boolean isPlay(){
        return play;
@@ -24,10 +22,12 @@ public class Stats {
         if(isPlay()){
             play = false;
             pause = true;
+
         }
-        else if (isPause()){
+        else{
             pause = false;
             play = true;
+
         }
     }
 
