@@ -146,6 +146,7 @@ public class Game extends JPanel implements ActionListener{
 
 
         repaint();
+        spawnAsteroids();
     }
     public void init(){
         entities = new ArrayList<Entity>();
@@ -171,6 +172,22 @@ public class Game extends JPanel implements ActionListener{
 
     public Rectangle getHitbox(int index){
     return entities.get(index).getBounds();
+    }
+
+
+    public void spawnAsteroids(){
+        int asteroidCount = 0;
+
+        for(int i = 0; i < entities.size(); i++){
+            if(entities.get(i) instanceof Asteroid){
+                asteroidCount++;
+            }
+        }
+
+        if(asteroidCount < 10){
+            entities.add(new Asteroid(Color.WHITE, (int)(25+(getWidth()-100)*Math.random()), (int)(25 + (getHeight() - 50)*Math.random()), 30, 30, this, 0, entities.size()));
+
+        }
     }
 
     public void paint(Graphics g){

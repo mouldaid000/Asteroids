@@ -10,7 +10,7 @@ public class Asteroid extends Entity {
     public Asteroid(Color color, int x, int y, int width, int height, Game game, int splitLevel, int index){
         super(color,x,y,width,height,game, index);
         this.splitLevel = splitLevel;
-        hitTimer = 20;
+        hitTimer = 30;
         setRandomVelocity();
     }
     public void paint(Graphics g){
@@ -48,7 +48,7 @@ public class Asteroid extends Entity {
 
         getGame().removeEntity(getIndex());
     }
-    else
+    else if(hitTimer <= 0)
             getGame().removeEntity(getIndex());
     }
 
