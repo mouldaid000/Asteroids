@@ -81,10 +81,11 @@ boolean bulletFired = false;
     }
 
     public void checkCollisions(){
-for(int i = 1; i < getGame().getNextIndex(); i++){
+    for(int i = 1; i < getGame().getNextIndex(); i++){
     if(getGame().getHitbox(i).intersects(getBounds())){
         if(getGame().getEntity(i) instanceof Asteroid){
             getGame().removeEntity(i);
+            Stats.health--;
 
         }
     }

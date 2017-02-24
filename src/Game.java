@@ -54,6 +54,9 @@ public class Game extends JPanel implements ActionListener{
                 if(e.getKeyCode() == KeyEvent.VK_P){
                      Stats.togglePause();
                 }
+                if(e.getKeyCode() == KeyEvent.VK_SPACE){
+                    Stats.startPlay();
+                }
             }
             @Override
             public void keyReleased(KeyEvent e){
@@ -77,7 +80,7 @@ public class Game extends JPanel implements ActionListener{
             public void mouseMoved(MouseEvent e){
                 super.mouseMoved(e);
                 cursorX = e.getX();
-               cursorY = e.getY();
+                cursorY = e.getY();
            }
         });
 
@@ -145,8 +148,6 @@ public class Game extends JPanel implements ActionListener{
                 entities.get(i).move();
             }
         }
-
-
         repaint();
         spawnAsteroids();
     }
@@ -160,10 +161,7 @@ public class Game extends JPanel implements ActionListener{
     }
     public void collisions(){
         for(int i = 0; i < entities.size(); i++) {
-
             entities.get(i).checkCollisions();
-
-
 
         }
     }
@@ -196,16 +194,24 @@ public class Game extends JPanel implements ActionListener{
 
         super.paint(g);
         if(Stats.isMenu()){
-            g.setFont(new Font("old english text mt",Font.PLAIN, 64));
+            g.setFont(new Font("ocr a extended",Font.PLAIN, 64));
             g.setColor(Color.CYAN);
             printSimpleString("ASTEROIDS",getWidth(),0,300,g);
-            g.setFont(new Font("old english text mt",Font.PLAIN, 48));
+            g.setFont(new Font("ocr a extended",Font.PLAIN, 48));
             printSimpleString("Press [SPACE] to play.", getWidth(), 0, 400,g);
+            g.setFont(new Font("ocr a extended",Font.PLAIN, 34));
+            g.setColor(Color.RED);
+            printSimpleString("Aidan Moulder & Ethan Thompson", getWidth(), 0, 475,g);
         }
         if(Stats.isPlay()){
             for(Entity obj : entities){
                 obj.paint(g);
             }
+            g.setColor(Color.CYAN);
+            g.setFont(new Font("ocr a extended", Font.PLAIN, 16));
+            printSimpleString("SCORE : " + Stats.score,getWidth(), -455,20,g);
+            printSimpleString("LIVES : " + Stats.lives, getWidth(), -455,35,g);
+            printSimpleString("HEALTH: " + Stats.health, getWidth(), -455,50, g);
         }
         if(Stats.isPause()){
             g.setFont(new Font("old english text mt", Font.ITALIC, 54));
