@@ -92,11 +92,14 @@ boolean visible = true;
     }
 
     public void kill(){
-Stats.removeLife();
-Stats.resetHealth();
-setX(getGame().getWidth() / 2);
-setY(getGame().getHeight() / 2);
-Stats.resetInvulnTimer();
+        Stats.removeLife();
+        Stats.resetHealth();
+        setX(getGame().getWidth() / 2);
+        setY(getGame().getHeight() / 2);
+        Stats.resetInvulnTimer();
+        if(Stats.getLives() == 0){
+            Stats.endGame();
+        }
 
     }
 
@@ -108,12 +111,12 @@ Stats.resetInvulnTimer();
             Stats.health--;
 
             if(Stats.getHealth() <= 0){
-     kill();
+                kill();
 
 
             }
         }
     }
-}
+    }
     }
 }

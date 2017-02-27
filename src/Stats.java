@@ -40,9 +40,15 @@ public class Stats {
 
     }
     public static void startPlay(){
-        if(isMenu()){
+        if(isMenu() ^ isEnd()){
             menu = false;
             play = true;
+            end = false;
+            invulnerabilityTimer = 0;
+
+            resetHealth();
+            resetLives();
+            resetScore();
         }
     }
 
@@ -55,8 +61,16 @@ public static void resetInvulnTimer(){
         invulnerabilityTimer = 120;
 }
 
+public static void resetScore(){
+    score = 0;
+}
+
 public static void decrementInvulnTimer(){
     invulnerabilityTimer--;
+}
+
+public static void resetLives(){
+    lives = 3;
 }
 
 
@@ -66,7 +80,11 @@ public static void decrementInvulnTimer(){
     public static void addLife(){
         lives += 1;
     }
+    public static int getLives(){return lives;}
     public static void addScore(){
         score += 250;
+    }
+    public static int getScore(){
+        return score;
     }
 }

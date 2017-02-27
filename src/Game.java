@@ -72,6 +72,10 @@ public class Game extends JPanel implements ActionListener{
                 if(e.getKeyCode() == KeyEvent.VK_D){
                     dPressed = false;
                 }
+
+                if(e.getKeyCode() == KeyEvent.VK_SPACE){
+                    spacePressed = false;
+                }
             }
         });
 
@@ -149,6 +153,11 @@ public class Game extends JPanel implements ActionListener{
                 entities.get(i).move();
             }
         }
+        if(Stats.isEnd()){
+            if(spacePressed){
+                resetGame();
+            }
+        }
         repaint();
         spawnAsteroids();
     }
@@ -169,6 +178,21 @@ public class Game extends JPanel implements ActionListener{
     public void run(){
         timer = new Timer(1000/60, this);
         timer.start();
+    }
+
+    public void resetGame(){
+        for(int i = 1; i < getNextIndex(); i++){
+            removeEntity(i);
+        }
+        for(int i = 0; i < 10; i++){
+            entities.add(new Asteroid(Color.WHITE, (int)(25+(getWidth()-100)*Math.random()), (int)(25 + (getHeight() - 50)*Math.random()), 30, 30, this, 0, entities.size()));
+        }
+
+
+        Stats.startPlay();
+
+
+
     }
 
     public Rectangle getHitbox(int index){
@@ -215,9 +239,17 @@ public class Game extends JPanel implements ActionListener{
             printSimpleString("HEALTH: " + Stats.health, getWidth(), -455,50, g);
         }
         if(Stats.isPause()){
-            g.setFont(new Font("old english text mt", Font.ITALIC, 54));
+            g.setFont(new Font("ocr a extended", Font.ITALIC, 54));
             g.setColor(Color.CYAN);
             printSimpleString("PAUSED",getWidth(), 0,getHeight()/2,g);
+        }
+        if(Stats.isEnd()){
+            g.setFont(new Font("ocr a extended", Font.BOLD, 96));
+            g.setColor(Color.CYAN);
+            printSimpleString("GAME OVER", getWidth(), 0 , getHeight()/2, g);
+            g.setFont(new Font("ocr a extended", Font.PLAIN, 36));
+            printSimpleString("Final Score: " + Stats.getScore(), getWidth(), 0, (getHeight()/2)+50, g);
+            printSimpleString("Press [SPACE] to play again!", getWidth(), 0, (getHeight()/2)+100, g );
         }
 
     }
