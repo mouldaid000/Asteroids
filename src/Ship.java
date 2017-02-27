@@ -7,13 +7,16 @@ import java.awt.*;
 public class Ship extends Entity {
 
 boolean bulletFired = false;
+boolean visible = true;
 
     public Ship(Color color, int x, int y, int width, int height, Game game, int index){
         super(color, x, y, width, height, game, index);
     }
     public void paint(Graphics g){
-        g.setColor(getColor());
-        g.fillOval(getX(),getY(), getWidth(), getHeight());
+        if(visible) {
+            g.setColor(Color.red);
+            g.fillOval(getX(), getY(), getWidth(), getHeight());
+        }
     }
 
     public void move(){
@@ -47,7 +50,7 @@ boolean bulletFired = false;
             setDy(prevDy);
         }
 
-        if(getGame().isLeftClick() && !bulletFired){
+        if(getGame().isLeftClick() && !bulletFired && !Stats.isInvincible()){
             bulletFired = true;
 
             getGame().addEntity(new Bullet(Color.yellow, getX() + (getWidth()) / 2, getY() + (getHeight()) / 2, 10, 10, calcBulletDy(), calcBulletDx(), getGame(), getGame().getNextIndex()));
@@ -57,6 +60,18 @@ boolean bulletFired = false;
 
         if(!getGame().isLeftClick())
             bulletFired = false;
+
+        if(Stats.isInvincible()){
+            if(visible){
+                visible = false;
+            }
+            else
+                visible = true;
+
+            Stats.decrementInvulnTimer();
+        }
+        else
+            visible = true;
 
         wallCollision();
 
@@ -77,16 +92,26 @@ boolean bulletFired = false;
     }
 
     public void kill(){
+Stats.removeLife();
+Stats.resetHealth();
+setX(getGame().getWidth() / 2);
+setY(getGame().getHeight() / 2);
+Stats.resetInvulnTimer();
 
     }
 
     public void checkCollisions(){
     for(int i = 1; i < getGame().getNextIndex(); i++){
     if(getGame().getHitbox(i).intersects(getBounds())){
-        if(getGame().getEntity(i) instanceof Asteroid){
+        if(getGame().getEntity(i) instanceof Asteroid && !Stats.isInvincible()){
             getGame().removeEntity(i);
             Stats.health--;
 
+            if(Stats.getHealth() <= 0){
+     kill();
+
+
+            }
         }
     }
 }

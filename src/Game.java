@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class Game extends JPanel implements ActionListener{
     static Timer timer;
-    int cursorX, cursorY;
+    int cursorX, cursorY, extraLifeChance;
     boolean wPressed, aPressed, sPressed, dPressed, leftClick, spacePressed;//Depressing, isn't it? Happy vALONEtine's day
 
     ArrayList<Entity> entities;
@@ -88,6 +88,7 @@ public class Game extends JPanel implements ActionListener{
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
+
             }
 
             @Override

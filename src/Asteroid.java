@@ -45,15 +45,19 @@ public class Asteroid extends Entity {
         for (int i = 0; i < 2; i++) {
             getGame().addEntity(new Asteroid(Color.WHITE, getX(), getY(), (int) (getWidth() / 1.5), (int)(getHeight() / 1.5), getGame(), splitLevel + 1, getGame().getNextIndex()));
         }
-
+            Stats.addScore();
         getGame().removeEntity(getIndex());
+
     }
     else if(hitTimer <= 0)
+            Stats.addScore();
             getGame().removeEntity(getIndex());
+
     }
 
     public void kill(){
         split();
+
     }
 
     public void checkCollisions(){
